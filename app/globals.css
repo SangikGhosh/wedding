@@ -1,0 +1,250 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+@custom-variant dark (&:is(.dark *));
+
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('https://fonts.gstatic.com/s/cormorantgaramond/v16/co3bmX5slCNuHLi8bLeY9MK7whWMhyjQAllvuQWJ5heb_w.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('https://fonts.gstatic.com/s/cormorantgaramond/v16/co3YmX5slCNuHLi8bLeY9MK7whWMhyjQWlhvuQWJ5heb_w.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('https://fonts.gstatic.com/s/playfairdisplay/v30/nuFvD-vYSZviVYUb_rj3ij__anPXJzDwcbmjWBN2PKdFvUDQ.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('https://fonts.gstatic.com/s/playfairdisplay/v30/nuFvD-vYSZviVYUb_rj3ij__anPXJzDwcbmjWBN2PKd2ukDQ.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Great Vibes';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('https://fonts.gstatic.com/s/greatvibes/v14/RWmMoKWR9v4ksMfaWd_JN9XFiaQ.woff2') format('woff2');
+}
+
+:root {
+  --background: #F8F5F0;
+  --foreground: #1B4D46;
+  --card: #FFFFFF;
+  --card-foreground: #1B4D46;
+  --popover: #FFFFFF;
+  --popover-foreground: #1B4D46;
+  --primary: #1B4D46;
+  --primary-foreground: #F8F5F0;
+  --secondary: #F8F5F0;
+  --secondary-foreground: #1B4D46;
+  --muted: #EDE8E0;
+  --muted-foreground: #5A7A75;
+  --accent: #CBA135;
+  --accent-foreground: #1B4D46;
+  --destructive: #DC2626;
+  --destructive-foreground: #FFFFFF;
+  --border: #CBA135;
+  --input: #EDE8E0;
+  --ring: #CBA135;
+  --radius: 0.5rem;
+  
+  /* Custom wedding colors */
+  --cream: #F8F5F0;
+  --teal: #1B4D46;
+  --gold: #CBA135;
+  --gold-light: #D4B85A;
+  --teal-light: #2A6B62;
+}
+
+.dark {
+  --background: #1B4D46;
+  --foreground: #F8F5F0;
+  --card: #2A6B62;
+  --card-foreground: #F8F5F0;
+  --popover: #2A6B62;
+  --popover-foreground: #F8F5F0;
+  --primary: #F8F5F0;
+  --primary-foreground: #1B4D46;
+  --secondary: #2A6B62;
+  --secondary-foreground: #F8F5F0;
+  --muted: #2A6B62;
+  --muted-foreground: #A8C4C0;
+  --accent: #CBA135;
+  --accent-foreground: #1B4D46;
+  --destructive: #DC2626;
+  --destructive-foreground: #FFFFFF;
+  --border: #CBA135;
+  --input: #2A6B62;
+  --ring: #CBA135;
+}
+
+@theme inline {
+  --font-sans: 'Cormorant Garamond', 'Georgia', serif;
+  --font-serif: 'Playfair Display', 'Georgia', serif;
+  --font-display: 'Great Vibes', cursive;
+  --font-mono: 'Geist Mono', 'Geist Mono Fallback';
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-cream: var(--cream);
+  --color-teal: var(--teal);
+  --color-gold: var(--gold);
+  --color-gold-light: var(--gold-light);
+  --color-teal-light: var(--teal-light);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--cream);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--gold);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--gold-light);
+}
+
+/* Ornate border pattern */
+.ornate-border {
+  position: relative;
+  border: 2px solid var(--gold);
+}
+
+.ornate-border::before,
+.ornate-border::after {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--gold);
+}
+
+.ornate-border::before {
+  top: -6px;
+  left: -6px;
+  border-right: none;
+  border-bottom: none;
+}
+
+.ornate-border::after {
+  bottom: -6px;
+  right: -6px;
+  border-left: none;
+  border-top: none;
+}
+
+/* Gold shimmer animation */
+@keyframes shimmer {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+.gold-shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--gold) 0%,
+    var(--gold-light) 25%,
+    #E8D078 50%,
+    var(--gold-light) 75%,
+    var(--gold) 100%
+  );
+  background-size: 200% auto;
+  animation: shimmer 3s linear infinite;
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+/* Floating animation */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Pulse glow */
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(203, 161, 53, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(203, 161, 53, 0.6);
+  }
+}
+
+.pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* Scratch card styles */
+.scratch-canvas {
+  cursor: crosshair;
+  touch-action: none;
+}

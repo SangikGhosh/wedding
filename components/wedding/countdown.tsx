@@ -1,7 +1,11 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 interface TimeLeft {
   days: number;
@@ -18,11 +22,12 @@ export function Countdown() {
     seconds: 0,
   });
   const [mounted, setMounted] = useState(false);
+  const countdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     setMounted(true);
-    // Wedding date: April 20, 2026 at 10:00 AM
-    const weddingDate = new Date("2026-04-20T10:00:00").getTime();
+    // Wedding date: April 26, 2026 at 6:00 PM
+    const weddingDate = new Date("2026-04-26T18:00:00").getTime();
 
     const calculateTimeLeft = () => {
       const now = new Date().getTime();
@@ -42,6 +47,34 @@ export function Countdown() {
     const timer = setInterval(calculateTimeLeft, 1000);
 
     return () => clearInterval(timer);
+  }, []);
+
+  useEffect(() => {
+    // GSAP animations for countdown cards
+    if (countdownRef.current) {
+      const cards = countdownRef.current.querySelectorAll(".countdown-card");
+      gsap.fromTo(
+        cards,
+        { y: 40, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.6,
+          stagger: 0.15,
+          ease: "back.out(1.7)",
+          scrollTrigger: {
+            trigger: countdownRef.current,
+            start: "top 80%",
+            end: "top 20%",
+            toggleActions: "play none none reverse",
+          },
+        }
+      );
+    }
+
+    return () => {
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+    };
   }, []);
 
   const timeUnits = [
@@ -72,21 +105,14 @@ export function Countdown() {
         </motion.div>
 
         {/* Countdown Timer */}
-        <motion.div
-          initial={{ scale: 0.9, opacity: 0 }}
-          whileInView={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          viewport={{ once: true }}
+        <div
+          ref={countdownRef}
           className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 md:gap-6"
         >
-          {timeUnits.map((unit, index) => (
-            <motion.div
+          {timeUnits.map((unit) => (
+            <div
               key={unit.label}
-              initial={{ y: 30, opacity: 0 }}
-              whileInView={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.5, delay: 0.1 * index }}
-              viewport={{ once: true }}
-              className="relative group"
+              className="countdown-card relative group"
             >
               {/* Card */}
               <div className="bg-white rounded-2xl p-4 sm:p-6 md:p-8 relative shadow-lg">
@@ -106,9 +132,9 @@ export function Countdown() {
                   {unit.label}
                 </span>
               </div>
-            </motion.div>
+            </div>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );

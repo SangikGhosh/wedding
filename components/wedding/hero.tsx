@@ -1,10 +1,15 @@
 "use client";
 
 import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export function Hero() {
   const ref = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start start", "end start"],
@@ -12,6 +17,28 @@ export function Hero() {
 
   const y = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+
+  useEffect(() => {
+    // GSAP smooth scroll-triggered text reveal animations
+    if (contentRef.current) {
+      const elements = contentRef.current.querySelectorAll(
+        "h1, h2, p, button"
+      );
+      gsap.to(elements, {
+        scrollTrigger: {
+          trigger: contentRef.current,
+          start: "top 80%",
+          end: "top 20%",
+          scrub: 1,
+        },
+        ease: "power3.inOut",
+      });
+    }
+
+    return () => {
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+    };
+  }, []);
 
   return (
     <section ref={ref} className="relative min-h-[100dvh] w-full max-w-[100vw] flex items-center justify-center overflow-hidden">
@@ -48,6 +75,7 @@ export function Hero() {
 
       {/* Main Content */}
       <motion.div
+        ref={contentRef}
         className="relative z-10 text-center px-4 sm:px-6 w-full max-w-4xl mx-auto"
         style={{ opacity }}
       >

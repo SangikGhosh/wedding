@@ -1,11 +1,16 @@
 "use client";
 
+import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 interface Event {
   title: string;
-  location: string;
-  dates: { label: string; date: string }[];
+  time: string;
+  dates: string;
   venue: string;
   address: string;
   mapLink: string;
@@ -13,23 +18,20 @@ interface Event {
 
 const events: Event[] = [
   {
-    title: "Reception & Wedding",
-    location: "Chennai",
-    dates: [
-      { label: "Reception", date: "19 April 2026" },
-      { label: "Wedding", date: "20 April 2026" },
-    ],
-    venue: "ECR VGP Golden Beach",
-    address: "East Coast Road, Injambakkam, Chennai",
-    mapLink: "https://www.google.com/maps?q=VGP+Golden+Beach+Chennai",
+    title: "Wedding Ceremony",
+    time: "6:00 PM",
+    dates: "26 April 2026",
+    venue: "SAHAPUR ADARSHAPALLI NABARUN SANGHA",
+    address: "162 S. N. Roy Road, Newalipore, Kolkata-700038",
+    mapLink: "https://maps.app.goo.gl/JBMYX4nb2Ws6vTbb7?g_st=iwb",
   },
   {
     title: "Reception",
-    location: "Coimbatore",
-    dates: [{ label: "Reception", date: "22 April 2026" }],
-    venue: "Guna Hall, Hotel Anandhaas",
-    address: "Avinashi Road, Coimbatore",
-    mapLink: "https://www.google.com/maps?q=Hotel+Anandhaas+Coimbatore",
+    time: "Coming Soon",
+    dates: "Details Coming Soon",
+    venue: "TBD",
+    address: "Location details will be shared soon",
+    mapLink: "#",
   },
 ];
 
@@ -72,8 +74,42 @@ function CornerFlourish({ className }: { className: string }) {
 }
 
 export function EventCards() {
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const cardsRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    // GSAP animation for cards entrance
+    if (cardsRef.current) {
+      const cards = cardsRef.current.querySelectorAll(".event-card");
+      gsap.fromTo(
+        cards,
+        { y: 60, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.8,
+          stagger: 0.2,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 80%",
+            end: "top 20%",
+            toggleActions: "play none none reverse",
+          },
+        }
+      );
+    }
+
+    return () => {
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+    };
+  }, []);
+
   return (
-    <section className="py-12 md:py-20 px-4 md:px-12 bg-[#F8F5F0] w-full max-w-[100vw] overflow-hidden">
+    <section
+      ref={sectionRef}
+      className="py-12 md:py-20 px-4 md:px-12 bg-[#F8F5F0] w-full max-w-[100vw] overflow-hidden"
+    >
       <div className="max-w-6xl mx-auto">
         <motion.div
           initial={{ y: 50, opacity: 0 }}
@@ -91,17 +127,13 @@ export function EventCards() {
         </motion.div>
 
         {/* Events Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+        <div
+          ref={cardsRef}
+          className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8"
+        >
           {events.map((event, index) => (
-            <motion.div
-              key={event.title + event.location}
-              initial={{ y: 50, opacity: 0 }}
-              whileInView={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              viewport={{ once: true }}
-              className="group"
-            >
-              <div className="bg-white rounded-lg shadow-lg overflow-hidden relative min-h-[320px] sm:min-h-[380px] md:min-h-[400px]">
+            <div key={event.title} className="event-card">
+              <div className="bg-white rounded-lg shadow-lg overflow-hidden relative h-[420px] flex flex-col">
                 {/* Ornate Corner Flourishes */}
                 <CornerFlourish className="absolute top-2 left-2" />
                 <CornerFlourish className="absolute top-2 right-2 -scale-x-100" />
@@ -109,86 +141,86 @@ export function EventCards() {
                 <CornerFlourish className="absolute bottom-2 right-2 scale-x-[-1] scale-y-[-1]" />
 
                 {/* Content */}
-                <div className="p-6 sm:p-8 md:p-12 text-center relative z-10">
+                <div className="p-6 sm:p-8 md:p-10 text-center relative z-10 flex flex-col h-full justify-between">
                   {/* Title */}
-                  <h3
-                    className="text-2xl sm:text-3xl md:text-4xl text-[#1B4D46] mb-2 break-words leading-tight"
-                    style={{ fontFamily: "'Great Vibes', cursive" }}
-                  >
-                    {event.title}
-                  </h3>
-
-                  {/* Location */}
-                  <p className="text-[#CBA135] text-lg font-semibold mb-6 tracking-wider">
-                    {event.location}
-                  </p>
-
-                  {/* Dates */}
-                  <div className="space-y-3 mb-8">
-                    {event.dates.map((d) => (
-                      <div key={d.label} className="text-[#1B4D46]">
-                        <span className="text-[#5A7A75] text-sm">{d.label}: </span>
-                        <span
-                          className="text-xl font-semibold"
-                          style={{ fontFamily: "'Playfair Display', serif" }}
-                        >
-                          {d.date}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-
-                  {/* Decorative Divider */}
-                  <div className="flex items-center justify-center gap-3 mb-6">
-                    <div className="h-px w-12 bg-[#CBA135]" />
-                    <div className="w-2 h-2 rotate-45 bg-[#CBA135]" />
-                    <div className="h-px w-12 bg-[#CBA135]" />
-                  </div>
-
-                  {/* Venue */}
-                  <div className="mb-6">
-                    <p
-                      className="text-[#1B4D46] text-lg font-semibold mb-1"
-                      style={{ fontFamily: "'Playfair Display', serif" }}
+                  <div>
+                    <h3
+                      className="text-2xl sm:text-3xl md:text-3xl text-[#1B4D46] mb-4 break-words leading-tight"
+                      style={{ fontFamily: "'Great Vibes', cursive" }}
                     >
-                      {event.venue}
+                      {event.title}
+                    </h3>
+
+                    {/* Time */}
+                    <p className="text-[#CBA135] text-lg font-semibold mb-3 tracking-wider">
+                      {event.time}
                     </p>
-                    <p className="text-[#5A7A75] text-sm">{event.address}</p>
+
+                    {/* Dates */}
+                    <div className="text-[#1B4D46] mb-6">
+                      <span className="text-[#5A7A75] text-sm">Date: </span>
+                      <span
+                        className="text-lg font-semibold"
+                        style={{ fontFamily: "'Playfair Display', serif" }}
+                      >
+                        {event.dates}
+                      </span>
+                    </div>
+
+                    {/* Decorative Divider */}
+                    <div className="flex items-center justify-center gap-3 mb-6">
+                      <div className="h-px w-10 bg-[#CBA135]" />
+                      <div className="w-2 h-2 rotate-45 bg-[#CBA135]" />
+                      <div className="h-px w-10 bg-[#CBA135]" />
+                    </div>
+
+                    {/* Venue */}
+                    <div className="mb-6">
+                      <p
+                        className="text-[#1B4D46] text-base font-semibold mb-2"
+                        style={{ fontFamily: "'Playfair Display', serif" }}
+                      >
+                        {event.venue}
+                      </p>
+                      <p className="text-[#5A7A75] text-sm">{event.address}</p>
+                    </div>
                   </div>
 
                   {/* View Location Button */}
-                  <motion.a
-                    href={event.mapLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    className="inline-flex items-center gap-2 px-6 py-3 border-2 border-[#1B4D46] text-[#1B4D46] rounded-full hover:bg-[#1B4D46] hover:text-[#F8F5F0] transition-colors"
-                  >
-                    <svg
-                      className="w-5 h-5"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
+                  {event.mapLink !== "#" && (
+                    <motion.a
+                      href={event.mapLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      className="inline-flex items-center justify-center gap-2 px-6 py-3 border-2 border-[#1B4D46] text-[#1B4D46] rounded-full hover:bg-[#1B4D46] hover:text-[#F8F5F0] transition-colors mt-auto"
                     >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                      />
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                      />
-                    </svg>
-                    <span>View Location</span>
-                  </motion.a>
+                      <svg
+                        className="w-5 h-5"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                        />
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                        />
+                      </svg>
+                      <span>View Location</span>
+                    </motion.a>
+                  )}
                 </div>
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>

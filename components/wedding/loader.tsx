@@ -13,6 +13,7 @@ export function Loader({ onComplete }: LoaderProps) {
   const coupleNameRef = useRef<HTMLDivElement>(null);
   const detailsRef = useRef<HTMLDivElement>(null);
   const [hasTapped, setHasTapped] = useState(false);
+  const [isPressed, setIsPressed] = useState(false);
 
   useEffect(() => {
     // Wait for the user to tap the cover before starting animations
@@ -55,48 +56,177 @@ export function Loader({ onComplete }: LoaderProps) {
           exit={{ opacity: 0 }} // Smooth fade out when the whole component unmounts
           transition={{ duration: 0.8 }}
       >
-        {/* THEMED COVER LAYER */}
+        {/* ENHANCED THEMED COVER LAYER */}
         <AnimatePresence>
           {!hasTapped && (
               <motion.div
-                  className="absolute inset-0 z-50 flex items-center justify-center bg-[#1B4D46] cursor-pointer"
+                  className="absolute inset-0 z-50 flex items-center justify-center bg-gradient-to-br from-[#1B4D46] via-[#0F352E] to-[#1B4D46] cursor-pointer overflow-hidden"
                   initial={{ opacity: 1 }}
-                  exit={{ opacity: 0, scale: 1.05 }}
-                  transition={{ duration: 0.8, ease: "easeInOut" }}
+                  exit={{ opacity: 0, scale: 1.08 }}
+                  transition={{ duration: 1, ease: "easeInOut" }}
                   onClick={() => setHasTapped(true)}
+                  onMouseDown={() => setIsPressed(true)}
+                  onMouseUp={() => setIsPressed(false)}
+                  onTouchStart={() => setIsPressed(true)}
+                  onTouchEnd={() => setIsPressed(false)}
               >
-                <div className="relative flex flex-col items-center justify-center">
-                  {/* Pulsing Outer Golden Ring */}
-                  <motion.div
-                      className="absolute inset-0 rounded-full border border-[#CBA135] opacity-50"
-                      animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.8, 0.3] }}
-                      transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
-                  />
+                {/* Animated background orbs */}
+                <motion.div
+                    className="absolute top-1/4 -left-32 w-96 h-96 bg-[#CBA135] rounded-full opacity-10 blur-3xl"
+                    animate={{
+                      x: [0, 100, -50, 0],
+                      y: [0, -50, 100, 0],
+                    }}
+                    transition={{
+                      duration: 15,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                    }}
+                />
+                <motion.div
+                    className="absolute bottom-1/4 -right-32 w-96 h-96 bg-[#CBA135] rounded-full opacity-10 blur-3xl"
+                    animate={{
+                      x: [0, -100, 50, 0],
+                      y: [0, 50, -100, 0],
+                    }}
+                    transition={{
+                      duration: 18,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                    }}
+                />
 
-                  {/* Inner Decorative Circle */}
-                  <div className="w-40 h-40 rounded-full border-2 border-[#CBA135] flex items-center justify-center bg-[#0F352E] shadow-2xl relative overflow-hidden">
-                    <div
-                        className="absolute inset-0 opacity-20"
+                <div className="relative flex flex-col items-center justify-center gap-12 z-10">
+                  {/* Main Interactive Button/Circle */}
+                  <motion.div
+                      className="relative flex flex-col items-center justify-center"
+                      animate={{
+                        y: isPressed ? 4 : 0,
+                      }}
+                      transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                  >
+                    {/* Outer shimmer ring */}
+                    <motion.div
+                        className="absolute inset-0 rounded-full border border-[#CBA135] opacity-40"
+                        animate={{
+                          scale: [1, 1.15, 1],
+                          opacity: [0.2, 0.6, 0.2],
+                        }}
+                        transition={{
+                          duration: 2.8,
+                          repeat: Infinity,
+                          ease: "easeInOut",
+                        }}
                         style={{
-                          backgroundImage: `url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23CBA135' fill-opacity='1' fill-rule='evenodd'%3E%3Ccircle cx='3' cy='3' r='3'/%3E%3Ccircle cx='13' cy='13' r='3'/%3E%3C/g%3E%3C/svg%3E")`,
+                          width: "240px",
+                          height: "240px",
                         }}
                     />
+
+                    {/* Secondary glow ring */}
                     <motion.div
-                        className="text-center z-10"
-                        animate={{ y: [0, -3, 0] }}
-                        transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                    >
-                      <p className="text-[#CBA135] text-xs tracking-[0.3em] font-semibold uppercase mb-1">
-                        Invitation
-                      </p>
-                      <p
-                          className="text-[#F8F5F0] text-xl"
-                          style={{ fontFamily: "'Playfair Display', serif" }}
+                        className="absolute inset-0 rounded-full border border-[#D4B85A] opacity-20"
+                        animate={{
+                          scale: [1, 1.3, 1],
+                          opacity: [0.1, 0.3, 0.1],
+                        }}
+                        transition={{
+                          duration: 3.5,
+                          repeat: Infinity,
+                          ease: "easeInOut",
+                          delay: 0.2,
+                        }}
+                        style={{
+                          width: "280px",
+                          height: "280px",
+                        }}
+                    />
+
+                    {/* Main Circle with Glass Effect */}
+                    <div className="w-60 h-60 rounded-full border-2 border-[#CBA135]/30 flex items-center justify-center bg-gradient-to-br from-[#1B4D46]/40 to-[#0F352E]/60 backdrop-blur-xl shadow-2xl relative overflow-hidden group">
+                      {/* Inner gradient overlay */}
+                      <div
+                          className="absolute inset-0 opacity-20"
+                          style={{
+                            background: "radial-gradient(circle at 30% 30%, rgba(203, 161, 53, 0.2), transparent 70%)",
+                          }}
+                      />
+
+                      {/* Decorative pattern */}
+                      <div
+                          className="absolute inset-0 opacity-15"
+                          style={{
+                            backgroundImage: `url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h40v40H0z' fill='%23CBA135' fill-opacity='0.05'/%3E%3Cpath d='M0 0l40 40M40 0L0 40' stroke='%23CBA135' stroke-width='0.5' opacity='0.1'/%3E%3C/svg%3E")`,
+                          }}
+                      />
+
+                      {/* Animated content */}
+                      <motion.div
+                          className="text-center z-10 flex flex-col items-center gap-6"
+                          animate={{
+                            y: [0, -4, 0],
+                          }}
+                          transition={{
+                            duration: 2.5,
+                            repeat: Infinity,
+                            ease: "easeInOut",
+                          }}
                       >
-                        Tap to Open
-                      </p>
-                    </motion.div>
-                  </div>
+                        <motion.div
+                            animate={{
+                              opacity: [0.6, 1, 0.6],
+                            }}
+                            transition={{
+                              duration: 2,
+                              repeat: Infinity,
+                              ease: "easeInOut",
+                            }}
+                        >
+                          <p className="text-[#CBA135] text-xs tracking-[0.4em] font-semibold uppercase mb-2 drop-shadow-lg">
+                            Invitation
+                          </p>
+                          <p
+                              className="text-[#F8F5F0] text-2xl sm:text-3xl font-light tracking-wide drop-shadow-lg"
+                              style={{ fontFamily: "'Playfair Display', serif" }}
+                          >
+                            Tap to Open
+                          </p>
+                        </motion.div>
+
+                        {/* Tap indicator */}
+                        <motion.div
+                            className="flex gap-1"
+                            animate={{
+                              opacity: [0.3, 1, 0.3],
+                            }}
+                            transition={{
+                              duration: 1.5,
+                              repeat: Infinity,
+                              ease: "easeInOut",
+                            }}
+                        >
+                          <div className="w-1 h-1 bg-[#CBA135] rounded-full" />
+                          <div className="w-1 h-1 bg-[#CBA135] rounded-full" />
+                          <div className="w-1 h-1 bg-[#CBA135] rounded-full" />
+                        </motion.div>
+                      </motion.div>
+                    </div>
+                  </motion.div>
+
+                  {/* Subtle text instruction */}
+                  <motion.p
+                      className="text-[#D4B85A] text-sm tracking-[0.2em] uppercase font-light"
+                      animate={{
+                        opacity: [0.4, 0.8, 0.4],
+                      }}
+                      transition={{
+                        duration: 3,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                      }}
+                  >
+                    Click to reveal
+                  </motion.p>
                 </div>
               </motion.div>
           )}

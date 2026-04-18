@@ -248,3 +248,80 @@
   cursor: crosshair;
   touch-action: none;
 }
+
+/* Smooth tap to open animations */
+@keyframes liquid-wave {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  25% {
+    transform: translate(-10px, -5px) scale(1.02);
+  }
+  50% {
+    transform: translate(0, -8px) scale(1.05);
+  }
+  75% {
+    transform: translate(10px, -3px) scale(1.02);
+  }
+}
+
+@keyframes smooth-bloom {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.2);
+    opacity: 0;
+  }
+}
+
+@keyframes glass-shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+@keyframes gentle-float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes soft-glow {
+  0%, 100% {
+    box-shadow: 0 0 30px rgba(203, 161, 53, 0.2), inset 0 0 30px rgba(255, 255, 255, 0.1);
+  }
+  50% {
+    box-shadow: 0 0 50px rgba(203, 161, 53, 0.4), inset 0 0 30px rgba(255, 255, 255, 0.15);
+  }
+}
+
+.animate-liquid-wave {
+  animation: liquid-wave 3s ease-in-out infinite;
+}
+
+.animate-smooth-bloom {
+  animation: smooth-bloom 2s cubic-bezier(0.34, 1.56, 0.64, 1) infinite;
+}
+
+.animate-glass-shimmer {
+  animation: glass-shimmer 3s linear infinite;
+}
+
+.animate-gentle-float {
+  animation: gentle-float 3s ease-in-out infinite;
+}
+
+.animate-soft-glow {
+  animation: soft-glow 2.5s ease-in-out infinite;
+}

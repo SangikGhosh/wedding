@@ -80,9 +80,10 @@ export function Loader({ onComplete }: LoaderProps) {
                         opacity: [0.8, 0.4, 0],
                       }}
                       transition={{
-                        duration: 2,
+                        duration: 2.4,
                         repeat: Infinity,
                         ease: "easeOut",
+                        repeatDelay: 0.2,
                       }}
                       style={{
                         width: "240px",
@@ -98,10 +99,11 @@ export function Loader({ onComplete }: LoaderProps) {
                         opacity: [0.8, 0.4, 0],
                       }}
                       transition={{
-                        duration: 2,
+                        duration: 2.4,
                         repeat: Infinity,
                         ease: "easeOut",
-                        delay: 0.5,
+                        delay: 0.6,
+                        repeatDelay: 0.2,
                       }}
                       style={{
                         width: "240px",

@@ -138,42 +138,6 @@ export function Loader({ onComplete }: LoaderProps) {
 
         {/* MAIN LOADER CONTENT */}
         <div className="text-center w-full relative z-0">
-          {/* Couple Names */}
-          <motion.div
-              ref={coupleNameRef}
-              className="mb-8"
-              initial={{ opacity: 0 }}
-              animate={hasTapped ? { opacity: 1 } : { opacity: 0 }}
-              transition={{ duration: 0.5 }}
-          >
-            <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3">
-              {["S", "o", "n", "u"].map((letter, i) => (
-                  <span
-                      key={`bride-${i}`}
-                      className="name-letter opacity-0 text-2xl sm:text-3xl md:text-4xl text-[#1B4D46] font-semibold inline-block"
-                      style={{ fontFamily: "'Great Vibes', cursive" }}
-                  >
-                {letter}
-              </span>
-              ))}
-              <span
-                  className="name-letter opacity-0 text-2xl sm:text-3xl md:text-4xl text-[#CBA135] mx-2 inline-block"
-                  style={{ fontFamily: "'Great Vibes', cursive" }}
-              >
-              &
-            </span>
-              {["D", "i", "p", "a", "n", "n", "i", "t", "a"].map((letter, i) => (
-                  <span
-                      key={`groom-${i}`}
-                      className="name-letter opacity-0 text-2xl sm:text-3xl md:text-4xl text-[#1B4D46] font-semibold inline-block"
-                      style={{ fontFamily: "'Great Vibes', cursive" }}
-                  >
-                {letter}
-              </span>
-              ))}
-            </div>
-          </motion.div>
-
           {/* Spinning Mandala */}
           <motion.div
               className="relative w-24 h-24 sm:w-32 sm:h-32 md:w-48 md:h-48 max-w-[80%] mx-auto mb-8"
@@ -218,39 +182,6 @@ export function Loader({ onComplete }: LoaderProps) {
           >
             Preparing Something Beautiful
           </motion.p>
-
-          {/* Event Details */}
-          <motion.div
-              ref={detailsRef}
-              className="space-y-3 text-center"
-              initial={{ opacity: 0 }}
-              animate={hasTapped ? { opacity: 1 } : { opacity: 0 }}
-              transition={{ delay: 1.5 }}
-          >
-            <div className="detail-item opacity-0">
-              <p className="text-[#CBA135] text-sm font-semibold tracking-widest">
-                WEDDING CEREMONY
-              </p>
-            </div>
-            <div className="detail-item opacity-0">
-              <p
-                  className="text-[#1B4D46] text-lg font-semibold"
-                  style={{ fontFamily: "'Playfair Display', serif" }}
-              >
-                26 April 2026
-              </p>
-            </div>
-            <div className="detail-item opacity-0">
-              <p className="text-[#5A7A75] text-sm">6:00 PM</p>
-            </div>
-            <div className="detail-item opacity-0">
-              <p className="text-[#5A7A75] text-xs leading-relaxed">
-                SAHAPUR ADARSHAPALLI NABARUN SANGHA
-                <br />
-                Kolkata
-              </p>
-            </div>
-          </motion.div>
         </div>
       </motion.div>
   );

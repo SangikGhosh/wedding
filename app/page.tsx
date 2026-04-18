@@ -22,23 +22,17 @@ export default function WeddingInvitation() {
                 )}
             </AnimatePresence>
 
-            <div
-                style={{
-                    opacity: isLoading ? 0 : 1,
-                    transition: "opacity 0.5s ease-in-out",
-                    // Prevents invisible elements from being clicked while loading
-                    pointerEvents: isLoading ? "none" : "auto",
-                }}
-            >
-                <Hero />
-                <CoupleSection />
-                <ScratchCard />
-                <Countdown />
-                <EventCards />
-                <Venue />
-                {/* Pass the loading state down so the music knows when to start */}
-                <Footer isLoaded={!isLoading} />
-            </div>
+            {!isLoading && (
+                <div>
+                    <Hero />
+                    <CoupleSection />
+                    <ScratchCard />
+                    <Countdown />
+                    <EventCards />
+                    <Venue />
+                    <Footer isLoaded={!isLoading} />
+                </div>
+            )}
         </main>
     );
 }

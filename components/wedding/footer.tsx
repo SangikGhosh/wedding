@@ -97,7 +97,7 @@ export function Footer({ isLoaded = true }: FooterProps) {
                   className="text-2xl sm:text-3xl md:text-5xl text-[#CBA135] mb-4 text-center break-words leading-tight"
                   style={{ fontFamily: "'Great Vibes', cursive" }}
               >
-                S. Pravin Bala & L. Preethi
+                M. Sonu & Ms. Dipannita
               </h2>
             </motion.div>
 
@@ -119,7 +119,7 @@ export function Footer({ isLoaded = true }: FooterProps) {
                 className="text-[#F8F5F0] text-xl font-semibold"
                 style={{ fontFamily: "'Playfair Display', serif" }}
             >
-              20th April 2026
+              26th April 2026
             </motion.p>
 
             <motion.div
@@ -143,7 +143,7 @@ export function Footer({ isLoaded = true }: FooterProps) {
                 viewport={{ once: true }}
                 className="text-[#5A7A75] text-sm"
             >
-              Made with love for Pravin & Preethi&apos;s Wedding
+              Made with love for Sonu & Dipannita&apos;s Wedding
             </motion.p>
           </div>
         </footer>

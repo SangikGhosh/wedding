@@ -25,30 +25,17 @@ export function CoupleSection() {
             <div className="relative w-56 h-72 sm:w-64 sm:h-80 md:w-80 md:h-96">
               {/* First Photo - tilted left */}
               <motion.div
-                className="absolute top-0 left-0 w-40 h-52 sm:w-48 sm:h-60 md:w-56 md:h-72 bg-white p-2 sm:p-3 shadow-xl rounded-sm -rotate-3 z-10"
-                whileHover={{ rotate: 0, scale: 1.05, zIndex: 20 }}
-                transition={{ duration: 0.3 }}
+                  className="absolute top-0 left-0 w-40 h-52 sm:w-48 sm:h-60 md:w-56 md:h-72 bg-white p-2 sm:p-3 shadow-xl rounded-sm -rotate-3 z-10"
+                  whileHover={{ rotate: 0, scale: 1.05, zIndex: 20 }}
+                  transition={{ duration: 0.3 }}
               >
-                <div className="w-full h-[85%] bg-gradient-to-br from-[#EDE8E0] to-[#D4B85A]/20 rounded-sm flex items-center justify-center">
-                  <div className="text-center">
-                    <svg
-                      className="w-12 h-12 text-[#CBA135]/50 mx-auto mb-2"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={1}
-                        d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
-                      />
-                    </svg>
-                    <p className="text-[#5A7A75] text-xs">Couple Photo</p>
-                  </div>
-                </div>
+                <img
+                    src="https://res.cloudinary.com/dzr311jwb/image/upload/v1776525526/couple_k6y8op.jpg"
+                    alt="Couple Photo"
+                    className="w-full h-[85%] object-cover rounded-sm"
+                />
                 <p className="text-[#1B4D46] text-center text-sm mt-2 font-medium">
-                  Pravin & Preethi
+                    Our Story
                 </p>
               </motion.div>
 
@@ -58,26 +45,13 @@ export function CoupleSection() {
                 whileHover={{ rotate: 0, scale: 1.05, zIndex: 20 }}
                 transition={{ duration: 0.3 }}
               >
-                <div className="w-full h-[85%] bg-gradient-to-br from-[#EDE8E0] to-[#1B4D46]/10 rounded-sm flex items-center justify-center">
-                  <div className="text-center">
-                    <svg
-                      className="w-12 h-12 text-[#1B4D46]/30 mx-auto mb-2"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={1}
-                        d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
-                      />
-                    </svg>
-                    <p className="text-[#5A7A75] text-xs">Engagement Photo</p>
-                  </div>
-                </div>
+                <img
+                    src="https://res.cloudinary.com/dzr311jwb/image/upload/v1776525762/couple2_nmuvbb.jpg"
+                    alt="Couple Photo"
+                    className="w-full h-[85%] object-cover rounded-sm"
+                />
                 <p className="text-[#1B4D46] text-center text-sm mt-2 font-medium">
-                  Our Journey
+                    Cherished Moments
                 </p>
               </motion.div>
             </div>

@@ -15,6 +15,14 @@ export function Loader({ onComplete }: LoaderProps) {
   const [hasTapped, setHasTapped] = useState(false);
   const [isPressed, setIsPressed] = useState(false);
 
+  // Prevent scrolling while the loader is active
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, []);
+
   useEffect(() => {
     // Wait for the user to tap the cover before starting animations
     if (!hasTapped) return;

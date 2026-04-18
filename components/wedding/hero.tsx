@@ -115,9 +115,9 @@ export function Hero() {
             className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl text-[#1B4D46] text-center break-words leading-tight"
             style={{ fontFamily: "'Great Vibes', cursive" }}
           >
-            <span className="block sm:inline">S. Pravin Bala</span>
+            <span className="block sm:inline">M. Sonu</span>
             <span className="text-[#CBA135] mx-1 sm:mx-2 md:mx-4">&</span>
-            <span className="block sm:inline">L. Preethi</span>
+            <span className="block sm:inline">Ms. Dipannita</span>
           </h1>
         </motion.div>
 

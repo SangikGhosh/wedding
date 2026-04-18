@@ -27,11 +27,11 @@ const events: Event[] = [
   },
   {
     title: "Reception",
-    time: "Coming Soon",
-    dates: "Details Coming Soon",
-    venue: "TBD",
-    address: "Location details will be shared soon",
-    mapLink: "#",
+    time: "6:00 PM",
+    dates: "26 April 2026",
+    venue: "SAHAPUR ADARSHAPALLI NABARUN SANGHA",
+    address: "162 S. N. Roy Road, Newalipore, Kolkata-700038",
+    mapLink: "https://maps.app.goo.gl/JBMYX4nb2Ws6vTbb7?g_st=iwb",
   },
 ];
 

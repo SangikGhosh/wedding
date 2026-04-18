@@ -12,30 +12,33 @@ import { Venue } from "@/components/wedding/venue";
 import { Footer } from "@/components/wedding/footer";
 
 export default function WeddingInvitation() {
-  const [isLoading, setIsLoading] = useState(true);
+    const [isLoading, setIsLoading] = useState(true);
 
-  return (
-    <main className="min-h-screen w-full max-w-[100vw] overflow-x-hidden">
-      <AnimatePresence mode="wait">
-        {isLoading && (
-          <Loader key="loader" onComplete={() => setIsLoading(false)} />
-        )}
-      </AnimatePresence>
+    return (
+        <main className="min-h-screen w-full max-w-[100vw] overflow-x-hidden">
+            <AnimatePresence mode="wait">
+                {isLoading && (
+                    <Loader key="loader" onComplete={() => setIsLoading(false)} />
+                )}
+            </AnimatePresence>
 
-      <div
-        style={{
-          opacity: isLoading ? 0 : 1,
-          transition: "opacity 0.5s ease-in-out",
-        }}
-      >
-        <Hero />
-        <CoupleSection />
-        <ScratchCard />
-        <Countdown />
-        <EventCards />
-        <Venue />
-        <Footer />
-      </div>
-    </main>
-  );
+            <div
+                style={{
+                    opacity: isLoading ? 0 : 1,
+                    transition: "opacity 0.5s ease-in-out",
+                    // Prevents invisible elements from being clicked while loading
+                    pointerEvents: isLoading ? "none" : "auto",
+                }}
+            >
+                <Hero />
+                <CoupleSection />
+                <ScratchCard />
+                <Countdown />
+                <EventCards />
+                <Venue />
+                {/* Pass the loading state down so the music knows when to start */}
+                <Footer isLoaded={!isLoading} />
+            </div>
+        </main>
+    );
 }

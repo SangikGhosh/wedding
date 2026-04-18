@@ -76,13 +76,13 @@ export function Loader({ onComplete }: LoaderProps) {
                   <motion.div
                       className="absolute rounded-full border border-[#CBA135] z-0"
                       animate={{
-                        scale: [1, 1.4, 1.8],
-                        opacity: [0.8, 0.4, 0],
+                        scale: [0.8, 1.3, 1.8], // Starts smaller (hidden behind the main circle)
+                        opacity: [0, 0.6, 0],   // Fades in smoothly, then fades out
                       }}
                       transition={{
-                        duration: 2,
+                        duration: 3,            // Slower, more romantic pacing
                         repeat: Infinity,
-                        ease: "easeOut",
+                        ease: "easeInOut",
                       }}
                       style={{
                         width: "240px",
@@ -94,14 +94,14 @@ export function Loader({ onComplete }: LoaderProps) {
                   <motion.div
                       className="absolute rounded-full border border-[#CBA135] z-0"
                       animate={{
-                        scale: [1, 1.4, 1.8],
-                        opacity: [0.8, 0.4, 0],
+                        scale: [0.8, 1.3, 1.8],
+                        opacity: [0, 0.6, 0],
                       }}
                       transition={{
-                        duration: 2,
+                        duration: 3,
                         repeat: Infinity,
-                        ease: "easeOut",
-                        delay: 0.5,
+                        ease: "easeInOut",
+                        delay: 1.5,             // Exactly half the duration for a perfect rhythm
                       }}
                       style={{
                         width: "240px",

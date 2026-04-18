@@ -74,7 +74,7 @@ export function Footer({ isLoaded = true }: FooterProps) {
         <audio
             ref={audioRef}
             loop
-            src="https://res.cloudinary.com/dzr311jwb/video/upload/v1776519383/song_nmze5t.mp3"
+            src="https://res.cloudinary.com/dzr311jwb/video/upload/v1776529951/song_wkdyqw.mp3"
         />
 
         {/* Footer Content */}

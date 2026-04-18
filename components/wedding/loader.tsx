@@ -71,70 +71,56 @@ export function Loader({ onComplete }: LoaderProps) {
                   onTouchEnd={() => setIsPressed(false)}
               >
 
-                <div className="relative flex flex-col items-center justify-center z-10">
-                  {/* Main Interactive Circle with Ripple Effect */}
-                  <div className="relative flex items-center justify-center w-64 h-64">
-                    {/* Ripple Ring 1 */}
-                    <motion.div
-                        className="absolute rounded-full border border-[#CBA135]"
-                        animate={{
-                          scale: [1, 1.4, 1.8],
-                          opacity: [0.8, 0.4, 0],
-                        }}
-                        transition={{
-                          duration: 2,
-                          repeat: Infinity,
-                          ease: "easeOut",
-                        }}
-                        style={{
-                          width: "240px",
-                          height: "240px",
-                          top: "50%",
-                          left: "50%",
-                          transform: "translate(-50%, -50%)",
-                        }}
-                    />
+                <div className="relative flex items-center justify-center w-80 h-80">
+                  {/* Ripple Ring 1 - Behind */}
+                  <motion.div
+                      className="absolute rounded-full border border-[#CBA135] z-0"
+                      animate={{
+                        scale: [1, 1.4, 1.8],
+                        opacity: [0.8, 0.4, 0],
+                      }}
+                      transition={{
+                        duration: 2,
+                        repeat: Infinity,
+                        ease: "easeOut",
+                      }}
+                      style={{
+                        width: "240px",
+                        height: "240px",
+                      }}
+                  />
 
-                    {/* Ripple Ring 2 */}
-                    <motion.div
-                        className="absolute rounded-full border border-[#CBA135]"
-                        animate={{
-                          scale: [1, 1.4, 1.8],
-                          opacity: [0.8, 0.4, 0],
-                        }}
-                        transition={{
-                          duration: 2,
-                          repeat: Infinity,
-                          ease: "easeOut",
-                          delay: 0.5,
-                        }}
-                        style={{
-                          width: "240px",
-                          height: "240px",
-                          top: "50%",
-                          left: "50%",
-                          transform: "translate(-50%, -50%)",
-                        }}
-                    />
+                  {/* Ripple Ring 2 - Behind */}
+                  <motion.div
+                      className="absolute rounded-full border border-[#CBA135] z-0"
+                      animate={{
+                        scale: [1, 1.4, 1.8],
+                        opacity: [0.8, 0.4, 0],
+                      }}
+                      transition={{
+                        duration: 2,
+                        repeat: Infinity,
+                        ease: "easeOut",
+                        delay: 0.5,
+                      }}
+                      style={{
+                        width: "240px",
+                        height: "240px",
+                      }}
+                  />
 
-                    {/* Main Circle */}
-                    <div className="absolute w-56 h-56 rounded-full border-2 border-[#CBA135] flex items-center justify-center bg-[#0F352E] shadow-lg"
-                        style={{
-                          top: "50%",
-                          left: "50%",
-                          transform: "translate(-50%, -50%)",
-                        }}>
-                      <div className="text-center">
-                        <p className="text-[#CBA135] text-xs tracking-[0.3em] font-semibold uppercase mb-3">
-                          Invitation
-                        </p>
-                        <p
-                            className="text-[#F8F5F0] text-2xl font-light tracking-wide"
-                            style={{ fontFamily: "'Playfair Display', serif" }}
-                        >
-                          Tap to Open
-                        </p>
-                      </div>
+                  {/* Main Circle - Front */}
+                  <div className="absolute z-10 w-56 h-56 rounded-full border-2 border-[#CBA135] flex items-center justify-center bg-[#0F352E] shadow-lg">
+                    <div className="text-center">
+                      <p className="text-[#CBA135] text-xs tracking-[0.3em] font-semibold uppercase mb-3">
+                        Invitation
+                      </p>
+                      <p
+                          className="text-[#F8F5F0] text-2xl font-light tracking-wide"
+                          style={{ fontFamily: "'Playfair Display', serif" }}
+                      >
+                        Tap to Open
+                      </p>
                     </div>
                   </div>
                 </div>

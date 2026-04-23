@@ -5,7 +5,7 @@ import './globals.css'
 export const metadata: Metadata = {
   title: 'M. Sonu& Ms. Dipannita | Wedding Invitation',
   description:
-      'You are cordially invited to celebrate the wedding of S. Pravin Bala & L. Preethi - A Royal Indian Wedding Celebration | 20th April 2026',
+      '',
   icons: {
     icon: '/favicon.ico',
     apple: '/public/placeholder-user.jpg',

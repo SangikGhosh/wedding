@@ -3,7 +3,7 @@ import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'S. Pravin Bala & L. Preethi | Wedding Celebration',
+  title: 'M. Sonu& Ms. Dipannita | Wedding Invitation',
   description:
       'You are cordially invited to celebrate the wedding of S. Pravin Bala & L. Preethi - A Royal Indian Wedding Celebration | 20th April 2026',
   icons: {
